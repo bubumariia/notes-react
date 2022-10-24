@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import "./index.css";
+import { useState, useEffect } from "react";
+import { nanoid } from "nanoid";
 
-function App() {
+import Header from "./components/Header";
+import Search from "./components/Search";
+import NotesList from "./components/Notes/NotesList";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleThemeMode } from "./redux/themeReducer";
+
+// 1. Create Search Reducer
+// 2. Create Note Reducer
+
+export default function App() {
+  const darkMode = useSelector((state) => state.theme.darkMode);
+  const notes = useSelector((state) => state.notes.notes);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={`${darkMode && "dark-mode"}`}>
+      <div className="container">
+        <Header />
+        <Search />
+        <NotesList />
+      </div>
     </div>
   );
 }
-
-export default App;
